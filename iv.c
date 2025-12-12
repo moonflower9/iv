@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <SDL2/SDL.h>
 
@@ -51,19 +52,27 @@ int main(int argc, char **argv)
     SDL_Window *pwindow = SDL_CreateWindow("Image Viewer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
     SDL_Surface *psurface = SDL_GetWindowSurface(pwindow); 
 
-    Uint32 *dst = psurface->pixels;
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            Uint8 r = pixels[(y * width + x) * 3];
-            Uint8 g = pixels[(y * width + x) * 3 + 1];
-            Uint8 b = pixels[(y * width + x) * 3 + 2];
-            dst[y * width + x] = SDL_MapRGB(psurface->format, r, g, b);
+    bool quit = false;
+    SDL_Event e;
+
+    while (!quit) {
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT) {
+                quit = true;
+            }
+            Uint32 *dst = psurface->pixels;
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    Uint8 r = pixels[(y * width + x) * 3];
+                    Uint8 g = pixels[(y * width + x) * 3 + 1];
+                    Uint8 b = pixels[(y * width + x) * 3 + 2];
+                    dst[y * width + x] = SDL_MapRGB(psurface->format, r, g, b);
+                }
+            }
+
+            SDL_UpdateWindowSurface(pwindow);
         }
     }
-
-    SDL_UpdateWindowSurface(pwindow);
-
-    SDL_Delay(3000);
     
     free(pixels);
     SDL_DestroyWindow(pwindow);
