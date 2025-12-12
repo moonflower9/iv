@@ -13,9 +13,9 @@ void skip_comments(FILE *fp)
     ungetc(c, fp);
 }
 
-
 int main(int argc, char **argv)
 {
+    // exit if incorrect args are provided
     if (argc != 2) {
         fprintf(stderr, "usage: %s <path-to-image>\n", argv[0]);
         return 1;
@@ -28,6 +28,7 @@ int main(int argc, char **argv)
         return 1;
     }
     
+    // read header
     char magic[16];
     fgets(magic, sizeof(magic), in);
     int width, height, maxval;
@@ -45,6 +46,7 @@ int main(int argc, char **argv)
     fread(pixels, 3, numPixels, in);
     fclose(in);
 
+    // display window and image
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window *pwindow = SDL_CreateWindow("Image Viewer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
     SDL_Surface *psurface = SDL_GetWindowSurface(pwindow); 
