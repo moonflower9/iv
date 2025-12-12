@@ -52,14 +52,18 @@ int main(int argc, char **argv)
     SDL_Window *pwindow = SDL_CreateWindow("Image Viewer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
     SDL_Surface *psurface = SDL_GetWindowSurface(pwindow); 
 
+    // event loop flag and event handler
     bool quit = false;
     SDL_Event e;
 
     while (!quit) {
+        // poll for events
         while (SDL_PollEvent(&e)) {
+            // check for quit event
             if (e.type == SDL_QUIT) {
                 quit = true;
             }
+            // else main drawing
             Uint32 *dst = psurface->pixels;
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
