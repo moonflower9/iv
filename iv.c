@@ -63,15 +63,16 @@ int main(int argc, char **argv)
             if (e.type == SDL_QUIT) {
                 quit = true;
             }
-            // else main drawing
-            Uint32 *dst = psurface->pixels;
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    Uint8 r = pixels[(y * width + x) * 3];
-                    Uint8 g = pixels[(y * width + x) * 3 + 1];
-                    Uint8 b = pixels[(y * width + x) * 3 + 2];
-                    dst[y * width + x] = SDL_MapRGB(psurface->format, r, g, b);
-                }
+        }
+
+        // main drawing
+        Uint32 *dst = psurface->pixels;
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Uint8 r = pixels[(y * width + x) * 3];
+                Uint8 g = pixels[(y * width + x) * 3 + 1];
+                Uint8 b = pixels[(y * width + x) * 3 + 2];
+                dst[y * width + x] = SDL_MapRGB(psurface->format, r, g, b);
             }
 
             SDL_UpdateWindowSurface(pwindow);
