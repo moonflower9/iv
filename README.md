@@ -22,7 +22,6 @@ Visit the [Releases](https://github.com/moonflower9/iv/releases) tab to download
 iv.exe       # Executable binary
 SDL2.dll     # SDL2 runtime library
 README.txt   # Quick start instructions
-LICENSE.txt  # Project license
 ```
 
 **Steps:**
