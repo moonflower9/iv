@@ -1,3 +1,0 @@
-A simple application written in C to parse and display PPM P6 images using SDL2.
-
-Compile from source using: gcc -l SDL2 -o <output destination> iv.c
